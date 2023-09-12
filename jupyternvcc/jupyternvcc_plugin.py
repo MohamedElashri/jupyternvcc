@@ -38,7 +38,10 @@ class NVCCPLUGIN(Magics):
         cmd += ['--threads={}'.format(options.threads)]
         cmd += ['-arch={}'.format(options.arch)]
 
+        # Run the nvcc compiler
         res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        # Change the permissions of the output file to be read, write, and executable for everyone
+        os.chmod(self.out, 0o755)
         res = res.decode()
         jupyternvcc_helper.print_out(res)
         return None
