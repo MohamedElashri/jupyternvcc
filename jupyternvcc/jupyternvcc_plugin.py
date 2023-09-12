@@ -47,7 +47,6 @@ class NVCCPLUGIN(Magics):
     @argument('-c', '--compile', type=bool, help='Should be compiled?')
     @argument('-r', '--run', type=bool, help='Should be run?')
     @argument('-t', '--timeit', type=bool, help='Should be timed?')
-    @argument('--cudart', type=str, help='Cuda runtime version')
     @argument('--std', type=str, help='C++ standard')
     @argument('--threads', type=str, help='Number of threads')
     @argument('-arch', type=str, help='GPU architecture')
