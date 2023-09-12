@@ -27,7 +27,7 @@ class NVCCPLUGIN(Magics):
         self.out = os.path.join(current_dir, "result.out")
         print(f'Out bin {self.out}')
 
-    ##@staticmethod
+    @staticmethod
     def compile(output_dir, file_paths, out, options): #include options parameter
         print(f"Options received: {options}")
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
@@ -41,7 +41,7 @@ class NVCCPLUGIN(Magics):
         # Run the nvcc compiler
         res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
         # Change the permissions of the output file to be read, write, and executable for everyone
-        os.chmod(self.out, 0o755)
+        os.chmod(out, 0o755)
         res = res.decode()
         jupyternvcc_helper.print_out(res)
         return None
