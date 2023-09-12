@@ -87,7 +87,7 @@ class NVCCPLUGIN(Magics):
         return output
 
     @cell_magic
-    def cuda_run(self, line='', cell=None):
+    def run(self, line='', cell=None):
         try:
             args = self.argparser.parse_args(line.split())
         except SystemExit:
