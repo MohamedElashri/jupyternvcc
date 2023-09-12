@@ -48,10 +48,10 @@ class NVCCPLUGIN(Magics):
     @argument('-c', '--compile', action='store_true', help='Should it be compiled?')
     @argument('-r', '--run', action='store_true', help='Should it be run?')
     @argument('-t', '--timeit', action='store_true', help='Should it be timed?')
-    @argument('--cudart', type=str, help='Cuda runtime version ')
-    @argument('--std', type=str, help='C++ standard (default c++14)')
-    @argument('--threads', type=str, help='Number of threads (default 1))')
-    @argument('-arch', type=str, help='GPU architecture (default sm_70))')
+    @argument('--cudart', type=str, default='static', help='Cuda runtime version (default static)')
+    @argument('--std', type=str, default='c++14', help='C++ standard (default c++14)')
+    @argument('--threads', type=int, default=1, help='Number of threads (default 1)')
+    @argument('-arch', type=str, default='sm_70', help='GPU architecture (default sm_70)')
     @cell_magic
     def cuda(self, line='', cell=None):
         args = parse_argstring(self.cuda, line)
