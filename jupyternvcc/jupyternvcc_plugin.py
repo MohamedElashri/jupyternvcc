@@ -29,6 +29,7 @@ class NVCCPLUGIN(Magics):
 
     @staticmethod
     def compile(output_dir, file_paths, out, options): #include options parameter
+        print(f"Options received: {options}")
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
         cmd += ['--compile'] if options.compile else []
         cmd += ['--run'] if options.run else []
@@ -54,6 +55,7 @@ class NVCCPLUGIN(Magics):
     @cell_magic
     def cuda(self, line='', cell=None):
         args = parse_argstring(self.cuda, line)
+
         ex = args.name.split('.')[-1]
         if ex not in ['cu', 'h']:
             raise Exception('name must end with .cu or .h')
@@ -70,6 +72,7 @@ class NVCCPLUGIN(Magics):
         file_path = os.path.join(self.output_dir, args.name)
         with open(file_path, "w") as f:
             f.write(cell)
+        print(f'Parsed arguments: {args}')
 
         if args.compile:
             try:
