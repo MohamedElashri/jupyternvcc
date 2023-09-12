@@ -3,7 +3,7 @@ import subprocess
 
 from IPython.core.magic import Magics, cell_magic, magics_class
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
-import helper
+import jupyternvcc_helper
 
 compiler = '/usr/local/cuda/bin/nvcc'
 
@@ -13,7 +13,7 @@ class NVCCPLUGIN(Magics):
 
     def __init__(self, shell):
         super(NVCCPLUGIN, self).__init__(shell)
-        self.argparser = helper.get_argparser()
+        self.argparser = jupyternvcc_helper.get_argparser()
         current_dir = os.getcwd()
         self.output_dir = os.path.join(current_dir, 'src')
         if not os.path.exists(self.output_dir):
@@ -37,7 +37,7 @@ class NVCCPLUGIN(Magics):
 
         res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
         res = res.decode()
-        helper.print_out(res)
+        jupyternvcc_helper.print_out(res)
         return None
 
     @magic_arguments()
@@ -68,7 +68,7 @@ class NVCCPLUGIN(Magics):
                 self.compile(self.output_dir, file_path, self.out, args)  # pass args as options
                 output = self.run(timeit=args.timeit)
             except subprocess.CalledProcessError as e:
-                helper.print_out(e.output.decode("utf8"))
+                jupyternvcc_helper.print_out(e.output.decode("utf8"))
                 output = None
         else:
             output = f'File written in {file_path}'
@@ -91,7 +91,7 @@ class NVCCPLUGIN(Magics):
             self.compile(self.output_dir, ' '.join(cuda_src), self.out, args)  # pass args as options
             output = self.run(timeit=args.timeit)
         except subprocess.CalledProcessError as e:
-            helper.print_out(e.output.decode("utf8"))
+            jupyternvcc_helper.print_out(e.output.decode("utf8"))
             output = None
 
         return output
