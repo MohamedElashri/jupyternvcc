@@ -32,6 +32,7 @@ class NVCCPLUGIN(Magics):
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
         cmd += ['--compile'] if options.compile else []
         cmd += ['--run'] if options.run else []
+        cmd += ['--cudart={}'.format(options.cudart)]
         cmd += ['--std={}'.format(options.std)]
         cmd += ['--threads={}'.format(options.threads)]
         cmd += ['-arch={}'.format(options.arch)]
@@ -42,13 +43,14 @@ class NVCCPLUGIN(Magics):
         return None
 
     @magic_arguments()
-    @argument('-n', '--name', type=str, help='file name that will be produced by the cell. must end with .cu extension')
-    @argument('-c', '--compile', type=bool, help='Should be compiled?')
-    @argument('-r', '--run', type=bool, help='Should be run?')
-    @argument('-t', '--timeit', type=bool, help='Should be timed?')
-    @argument('--std', type=str, help='C++ standard')
-    @argument('--threads', type=str, help='Number of threads')
-    @argument('-arch', type=str, help='GPU architecture')
+    @argument('-n', '--name', type=str, help='file name, must end with .cu extension')
+    @argument('-c', '--compile', default=False, action='store_true', help='Should it be compiled?')
+    @argument('-r', '--run', type=bool, action='store_true', help='Should it be run?')
+    @argument('-t', '--timeit', type=bool, action='store_true', help='Should it be timed?')
+    @argument('--cudart', type=str, help='Cuda runtime version ')
+    @argument('--std', type=str, help='C++ standard (default c++14)')
+    @argument('--threads', type=str, help='Number of threads (default 1))')
+    @argument('-arch', type=str, help='GPU architecture (default sm_70))')
     @cell_magic
     def cuda(self, line='', cell=None):
         args = parse_argstring(self.cuda, line)
