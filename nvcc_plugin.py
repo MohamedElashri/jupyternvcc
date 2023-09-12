@@ -1,5 +1,5 @@
-from jupyternvcc.jupyternvcc_plugin import nvccplugin 
+from jupyternvcc.jupyternvcc_plugin import NVCCPLUGIN 
 def load_ipython_extension(ip):
     #initialize the  plugin
-    nvcc_plugin = nvccplugin(ip) 
+    nvcc_plugin = NVCCPLUGIN(ip) 
     ip.register_magics(nvcc_plugin)

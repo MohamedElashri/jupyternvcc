@@ -3,16 +3,16 @@ import subprocess
 
 from IPython.core.magic import Magics, cell_magic, magics_class
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
-from . import helper
+import helper
 
 compiler = '/usr/local/cuda/bin/nvcc'
 
 
 @magics_class
-class nvccplugin(Magics):
+class NVCCPLUGIN(Magics):
 
     def __init__(self, shell):
-        super(nvccplugin, self).__init__(shell)
+        super(NVCCPLUGIN, self).__init__(shell)
         self.argparser = helper.get_argparser()
         current_dir = os.getcwd()
         self.output_dir = os.path.join(current_dir, 'src')
