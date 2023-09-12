@@ -86,7 +86,7 @@ class NVCCPLUGIN(Magics):
 
         return output
     
-        def run(self, timeit=False):
+    def run(self, timeit=False):
         if timeit:
             stmt = f"subprocess.check_output(['{self.out}'], stderr=subprocess.STDOUT)"
             output = self.shell.run_cell_magic(
