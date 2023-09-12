@@ -27,7 +27,7 @@ class NVCCPLUGIN(Magics):
         self.out = os.path.join(current_dir, "result.out")
         print(f'Out bin {self.out}')
 
-    @staticmethod
+    ##@staticmethod
     def compile(output_dir, file_paths, out, options): #include options parameter
         print(f"Options received: {options}")
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
