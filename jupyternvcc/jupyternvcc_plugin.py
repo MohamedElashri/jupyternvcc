@@ -41,6 +41,8 @@ class NVCCPLUGIN(Magics):
 
         # Run the nvcc compiler
         try:
+            print(" ".join(cmd))
+            open(out, "w").close()
             res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
             print("Compilation failed: ", e.output)
