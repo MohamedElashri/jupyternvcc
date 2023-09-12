@@ -45,6 +45,12 @@ class NVCCPLUGIN(Magics):
     @magic_arguments()
     @argument('-n', '--name', type=str, help='file name that will be produced by the cell. must end with .cu extension')
     @argument('-c', '--compile', type=bool, help='Should be compiled?')
+    @argument('-r', '--run', type=bool, help='Should be run?')
+    @argument('-t', '--timeit', type=bool, help='Should be timed?')
+    @argument('--cudart', type=str, help='Cuda runtime version')
+    @argument('--std', type=str, help='C++ standard')
+    @argument('--threads', type=str, help='Number of threads')
+    @argument('-arch', type=str, help='GPU architecture')
     @cell_magic
     def cuda(self, line='', cell=None):
         args = parse_argstring(self.cuda, line)
