@@ -29,7 +29,6 @@ class nvccplugin(Magics):
     def compile(output_dir, file_paths, out, options): #include options parameter
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
         cmd += ['--compile'] if options.compile else []
-        cmd += ['--lib'] if options.lib else []
         cmd += ['--run'] if options.run else []
         cmd += ['--cudart={}'.format(options.cudart)]
         cmd += ['--std={}'.format(options.std)]
