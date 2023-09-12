@@ -39,7 +39,12 @@ class NVCCPLUGIN(Magics):
         cmd += ['-arch={}'.format(options.arch)]
 
         # Run the nvcc compiler
-        res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        try:
+            res = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as e:
+            print("Compilation failed: ", e.output)
+            return
+
         # Change the permissions of the output file to be read, write, and executable for everyone
         os.chmod(out, 0o755)
         res = res.decode()
