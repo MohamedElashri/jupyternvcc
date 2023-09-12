@@ -85,9 +85,22 @@ class NVCCPLUGIN(Magics):
             output = f'File written in {file_path}'
 
         return output
+    
+        def run(self, timeit=False):
+        if timeit:
+            stmt = f"subprocess.check_output(['{self.out}'], stderr=subprocess.STDOUT)"
+            output = self.shell.run_cell_magic(
+                magic_name="timeit", line="-q -o import subprocess", cell=stmt)
+        else:
+            output = subprocess.check_output(
+                [self.out], stderr=subprocess.STDOUT)
+            output = output.decode('utf8')
+
+        helper.print_out(output)
+        return None
 
     @cell_magic
-    def run(self, line='', cell=None):
+    def cuda_run(self, line='', cell=None):
         try:
             args = self.argparser.parse_args(line.split())
         except SystemExit:
