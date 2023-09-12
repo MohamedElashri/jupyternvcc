@@ -66,7 +66,7 @@ class nvccplugin(Magics):
 
         if args.compile:
             try:
-                self.compile(self.output_dir, file_path, self.out)
+                self.compile(self.output_dir, file_path, self.out, args)  # pass args as options
                 output = self.run(timeit=args.timeit)
             except subprocess.CalledProcessError as e:
                 helper.print_out(e.output.decode("utf8"))
@@ -89,7 +89,7 @@ class nvccplugin(Magics):
             cuda_src = [os.path.join(self.output_dir, x)
                         for x in cuda_src if x[-3:] == '.cu']
             print(f'found sources: {cuda_src}')
-            self.compile(self.output_dir, ' '.join(cuda_src), self.out)
+            self.compile(self.output_dir, ' '.join(cuda_src), self.out, args)  # pass args as options
             output = self.run(timeit=args.timeit)
         except subprocess.CalledProcessError as e:
             helper.print_out(e.output.decode("utf8"))
