@@ -45,9 +45,9 @@ class NVCCPLUGIN(Magics):
 
     @magic_arguments()
     @argument('-n', '--name', type=str, help='file name, must end with .cu extension')
-    @argument('-c', '--compile', type=bool ,default=False, action='store_true', help='Should it be compiled?')
-    @argument('-r', '--run', type=bool, action='store_true', help='Should it be run?')
-    @argument('-t', '--timeit', type=bool, action='store_true', help='Should it be timed?')
+    @argument('-c', '--compile', action='store_true', help='Should it be compiled?')
+    @argument('-r', '--run', action='store_true', help='Should it be run?')
+    @argument('-t', '--timeit', action='store_true', help='Should it be timed?')
     @argument('--cudart', type=str, help='Cuda runtime version ')
     @argument('--std', type=str, help='C++ standard (default c++14)')
     @argument('--threads', type=str, help='Number of threads (default 1))')
