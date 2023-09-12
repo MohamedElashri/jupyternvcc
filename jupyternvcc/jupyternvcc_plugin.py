@@ -32,7 +32,6 @@ class NVCCPLUGIN(Magics):
         cmd = [compiler, '-I' + output_dir, file_paths, "-o", out, '-Wno-deprecated-gpu-targets']
         cmd += ['--compile'] if options.compile else []
         cmd += ['--run'] if options.run else []
-        cmd += ['--cudart={}'.format(options.cudart)]
         cmd += ['--std={}'.format(options.std)]
         cmd += ['--threads={}'.format(options.threads)]
         cmd += ['-arch={}'.format(options.arch)]
