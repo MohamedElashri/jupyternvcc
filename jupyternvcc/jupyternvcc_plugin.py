@@ -2,7 +2,8 @@ import os
 import subprocess
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
-
+# Add the tmp dir to be the same as the current dir
+os.environ['TMPDIR'] = '.'
 from IPython.core.magic import Magics, cell_magic, magics_class
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 import jupyternvcc_helper
